@@ -1,0 +1,99 @@
+/* Top Navigation */
+nav a{
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Crimson Pro", sans-serif;
+  padding: 10px;
+  float: right;
+}
+
+nav a:hover, nav a:active, nav a{
+  text-decoration: none;
+  color: #9E652E;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+nav .navbar{
+  color: #000;
+  background: #F2F1F0;
+  border: solid 1px #F8F8F8;
+  height: 50px;
+}
+
+nav .container-fluid{
+  position: absolute;
+  top:0; bottom: 0;
+  right:0;
+  left:0;
+}
+
+nav .navbar-body{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+}
+
+nav .tabs .navbar-body li.active a{
+  /* color: #428BFF; */
+  color: #034638;
+  border-bottom: solid 3px #034638;
+}
+
+nav .tabs .navbar-body li:hover{
+  background: rgba(0,0,0,0.02);
+}
+
+/* Analysis Page: Sidetab */
+.sidetab {
+  float: left;
+  border: none;
+  width: 25%;
+  height: 100%;
+  word-wrap: break-word;
+  padding-right: 15px;
+}
+
+.sidetab .filename{
+  margin-top: 25px;
+  margin-bottom: 35px;
+  margin-left: 16px;
+}
+
+.sidetab button, .sidetab a{
+  display: block;
+  color: #428BFF;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  background-color: #FFF;
+}
+
+.sidetab button:hover{
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.sidetab button.active{
+  color: #034638;
+}
+
+/* Footer */
+footer{
+  font-size: 13px;
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  border-top: solid 1px #F8F8F8;
+}

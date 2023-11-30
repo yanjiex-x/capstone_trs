@@ -1,0 +1,6 @@
+Name,Description,Solution
+Mozilla Firefox < 115.0.2,The version of Firefox installed on the remote Windows host is prior to 115.0.2.,Upgrade Mozilla Firefox to version 115.0.2 or later.
+Google Chrome < 115.0.5790.98 Multiple Vulnerabilities,The version of Google Chrome installed on the remote Windows host is prior to 115.0.5790.98.,Upgrade Google Chrome to version 115.0.5790.98 or later.
+Security Updates for Microsoft Office Products C2R,"The Microsoft Office Products are missing security updates. It is, therefore, affected by a spoofing vulnerability that can be exploited by an unauthenticated, remote attacker.","For Office 365, Office 2016 C2R, or Office 2019, ensure automatic updates are enabled or open any office app and manually perform an update."
+Microsoft Windows Raw Image Extensions Library Multiple Vulnerabilities,The Windows app installed on the remote host is affected by multiple code execution vulnerabilities.,"Upgrade to app version 2.0.61662.0, 2.1.61661.0 or later via the Microsoft Store."
+Microsoft 3D Viewer Multiple Vulnerabilities,"The version of the Microsoft 3D Viewer app installed on the remote host is prior to 7.2107.7012.0. It is, therefore, affected by multiple remote code execution vulnerabilities. ","Upgrade to app version 7.2107.7012.0., or later via the Microsoft Store."

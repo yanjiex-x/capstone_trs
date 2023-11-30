@@ -1,0 +1,303 @@
+body{
+  font-family: "Crimson Pro", sans-serif;
+  font-size: 15px;
+}
+
+.content{
+  padding: 20px 20px;
+}
+
+h1{
+  font-size: 20px;
+  font-weight: bold;
+  color: #034638;
+}
+
+h2{
+  font-size: 18px;
+  font-weight: bold;
+  color: #9E652E;
+}
+
+h3{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+h4{
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Index Page */
+.input_container{
+  border: 1px solid #E5E5E5;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type=file]::file-selector-button{
+  background-color: #FFF;
+  color: #000;
+  border: 0px;
+  border-right: 1px solid #E5E5E5;
+  padding: 10px 15px;
+  margin-right: 20px;
+  transition: .5s;
+}
+
+input[type=file]::file-selector-button:hover{
+  background-color: #EEE;
+  border: 0px;
+  border-right: 1px solid #E5E5E5;
+}
+
+#submit{
+  background-color: #FFF;
+  color: #000;
+  border: 0px;
+  border-left: 1px solid #E5E5E5;
+  padding: 10px 15px;
+  transition: .5s;
+}
+
+#submit:hover{
+  background-color: #EEEEEE;
+  border: 0px;
+  border-left: 1px solid #E5E5E5;
+}
+
+.row{
+  width: 85%;
+  margin-top: 20px;
+}
+
+/* Analysis Page */
+
+.analysis_header{
+  font-size: 16px;
+  font-weight: bold;
+  color: #034638;
+}
+
+.row{
+  width: 100%;
+}
+
+.sidetabcontent{
+  float: left;
+  width: 75%;
+  height: 900px;
+  overflow: auto;
+  display: none;
+  padding: 20px 15px;
+}
+
+.analysiscontentheader{
+  padding: 5px 5px;
+  width: 75%;
+}
+
+.tablecontent{
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.tablecontent th, .tablecontent td{
+  border: solid 1px #ADB5BD;
+  padding: 5px;
+  border-collapse: collapse;
+}
+
+.description{
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+.subheader, .subheader_1, .subheader_2{
+  background-color: #f2f5f7;
+}
+
+.tablecontent .subheader_1{
+  width: 20%;
+}
+
+.tablecontent .subheader_2{
+  width: 40%;
+}
+
+.tablecontent .tablecell{
+  vertical-align: top;
+}
+
+.subsection button{
+  background-color: #FFF;
+  border: none;
+  float: right;
+  text-decoration: underline;
+}
+
+.hide{
+  display: none;
+}
+
+#link{
+  text-decoration: none;
+}
+
+#download{
+  text-align: center;
+}
+
+#download_img{
+  width: 30px;
+  margin-right: 10px;
+}
+
+.reportform{
+  background: rgba(#333, 0.5);
+}
+
+.reportform #formtable{
+  margin-top: 30px;
+  width: 50%;
+}
+
+.reportform td{
+  padding-bottom: 15px;
+}
+
+.reportform .coltwo{
+  margin-left: 20px;
+}
+
+.reportform .grbtn{
+  width: 460px;
+}
+
+#resources{
+  text-align: right;
+}
+
+#resourceslink{
+  text-decoration: none;
+  color: #428BFF;
+}
+
+#resourceslink:hover{
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Guides Page */
+.guides{
+  margin-top: 20px;
+}
+
+.guides a.active{
+  background-color: #4E7D7E;
+  border-color: #4E7D7E;
+}
+
+.guides #list-tab{
+  width: 80%;
+}
+
+.guides #nav-tabContent{
+  margin-left: -10px;
+}
+
+.inner_content{
+  /* width: 80%; */
+  height: 750px;
+  overflow: auto;
+}
+
+.instructions li{
+  padding-top: 12px;
+}
+
+.alert-light{
+  background-color: #EDEDED;
+}
+
+/* Scripts page */
+#search_list{
+  background-image: url('search-icon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  width: 100%;
+  font-size: 15px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #DDDDDD;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#app_list{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow: auto;
+  border: 1px solid #DDDDDD;
+}
+
+#app_list li button{
+  border: 1px solid #DDDDDD;
+  background-color: #F8F8F8;
+  margin-top: -1px;
+  padding: 12px;
+  text-decoration: none;
+  color: black;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.listcontent{
+  display: none;
+  margin-top: 20px;
+  padding: 12px;
+  height: 500px;
+  overflow: auto;
+}
+
+.listcontent > table{
+  width: 100%;
+}
+
+.listcontent > table th{
+  color: #034638;
+  width: 10%;
+  vertical-align: top;
+  padding-top: 15px;
+  font-weight: normal;
+}
+
+.listcontent > table td{
+  padding-top: 15px;
+}
+
+.listcontent > table td a{
+  text-decoration: none;
+}
+
+.alert-primary{
+  margin-top: 10px;
+  padding: 10px;
+  width: 60%;
+}
+
+#command{
+  border-width: 3px;
+  border-style: solid;
+  border-color: #C5C5C5;
+  padding: 8px;
+  margin-top: 10px;
+  width: 40%;
+}
