@@ -15,4 +15,5 @@ In case the web app needs to be ported to another virtual machine...
 ### (Recommended) Activating the virtual environment - Ubuntu
 
 > python -m venv env
+> 
 > source env/bin/activate
