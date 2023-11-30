@@ -4,27 +4,24 @@ from werkzeug.utils import secure_filename
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, IntegerField, DateField, SubmitField
 from wtforms.validators import InputRequired, Length, NumberRange, ValidationError
-import pdfkit, uuid, datetime, os, html #removed bleach as it is deprecated)
+import pdfkit, uuid, datetime, os, html
 import pandas as pd
-from boltons.iterutils import remap #to include in report
-import itertools, operator #to include in report
-from pdf2docx import parse #to include in report
-from collections import Counter # to include in report
-import json, plotly #to include in report (might remove, since using chart.js)
-import plotly.express as px #to include in report (might remove, since using chart.js)
+from boltons.iterutils import remap
+import itertools, operator
+from pdf2docx import parse
+from collections import Counter
 from googlesearch import search
 from bs4 import BeautifulSoup
 import requests
-import logging
 
 # Define path to wkhtmltopdf.exe
-path_to_wkhtmltopdf = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+path_to_wkhtmltopdf = r"/usr/bin/wkhtmltopdf"
 
 # Point pdfkit configuration to wkhtmltopdf.exe
 config = pdfkit.configuration(wkhtmltopdf=path_to_wkhtmltopdf)
 
 app = Flask(__name__)
-SITE_NAME = "https://localhostL5000"
+SITE_NAME = "https://localhost:5000"
 nav = Navigation(app)
 csrf = CSRFProtect(app)
 
@@ -41,6 +38,7 @@ nav.Bar('top', [
 ALLOWED_EXTENSIONS = {'csv'}
 app.config['UPLOAD_PATH'] = 'uploads'
 
+dateformat = '%Y-%m-%d'
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -58,7 +56,6 @@ def clear_dir():
 
 
 class ReportForm(FlaskForm):
-    dateformat = '%Y-%m-%d'
     companyname = StringField('Company Name:', validators=[InputRequired(), Length(min=2, max=200)], render_kw={"placeholder": "Enter the company's name here", "style": "width: 250px;"})
     companyabbv = StringField('Abbreviated Name:', validators=[InputRequired(), Length(min=2, max=30)], render_kw={"placeholder": "Enter the abbreviated name here", "style": "width: 250px;"})
     startdate = DateField('Start Date:', format=dateformat, validators=[InputRequired()])
@@ -517,7 +514,7 @@ def report():
                 docx = r"uploads/output.docx"
                 download_file = open(docx, 'rb')
                 response = make_response(download_file)
-                response.headers["Content-Type"] = "application/force-download"
+                response.headers["Content-Type"] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 response.headers['Content-Disposition'] = "attachment; filename="+fn+".docx"
                 return response
             else:
@@ -556,5 +553,4 @@ def proxy(path):
 
 
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', port='5002', debug=True)
     app.run(host='0.0.0.0', port='8000', debug=False, ssl_context=('cert.pem', 'key.pem'))
