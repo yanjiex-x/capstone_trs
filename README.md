@@ -4,7 +4,7 @@
 
 ## Building the Flask app (Ubuntu)
 
-In case the web app needs to be ported to another virtual machine...
+In case the web app needs to be ported to another virtual machine... if so, please refer to the handover document on necessary items to have before executing the web app
 
 ### Pre-Requisites
 
