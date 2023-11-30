@@ -17,3 +17,19 @@ In case the web app needs to be ported to another virtual machine...
 > python -m venv env
 > 
 > source env/bin/activate
+
+### Installing the necessary packages
+
+> pip install -r requirements.txt
+
+### Installing wkhtmltopdf
+
+> sudo apt-get -y install wkhtmltopdf
+
+## Executing the Flask app
+
+Activate the virtual environment before running the program!
+
+After activation,
+
+> python app.py
