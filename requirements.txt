@@ -1,0 +1,13 @@
+Flask
+Pandas
+Flask-Navigation
+Flask-WTF
+Pdfkit
+uuid
+Datetime
+boltons
+pdf2docx
+matplotlib
+plotly
+beautifulsoup4
+google
