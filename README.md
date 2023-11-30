@@ -10,4 +10,9 @@ In case the web app needs to be ported to another virtual machine...
 
 - Python 3.9 (tested and originally deployed in this version)
 - pip
-- virtual environment
+- virtual environment (recommended)
+
+### (Recommended) Activating the virtual environment - Ubuntu
+
+> python -m venv env
+> source env/bin/activate
