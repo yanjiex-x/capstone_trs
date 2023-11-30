@@ -2,6 +2,8 @@
 
 **Description:** Capstone Project done in TRS Forensics - A simple Flask app to ease the vulnerability assessment report writing process!
 
+
+
 ## Building the Flask app (Ubuntu)
 
 In case the web app needs to be ported to another virtual machine...
@@ -26,10 +28,12 @@ In case the web app needs to be ported to another virtual machine...
 
 > sudo apt-get -y install wkhtmltopdf
 
+
+
 ## Executing the Flask app
 
 Activate the virtual environment before running the program!
 
-After activation,
+Then
 
 > python app.py
