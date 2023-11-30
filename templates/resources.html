@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block head %}{% endblock %}
+
+{% block body %}
+  {% for keys, values in googleresults.items() %}
+    <h1>{{ keys }}</h1>
+    <hr>
+    <table style="margin-bottom: 20px;">
+      <caption hidden>Resources</caption>
+      {% for x in values %}
+        {% for k, v in x.items() %}
+          <tr>
+            <td>
+              <a href="{{ v }}">{{ k }}</a>
+            </td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+  {% endfor %}
+{% endblock %}

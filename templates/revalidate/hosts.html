@@ -1,0 +1,24 @@
+{% block body %}
+  {% for i in hosts %}
+    <table class="tablecontent">
+      <caption hidden>Sort by hosts</caption>
+      <tr>
+        <th scope="row" colspan="3">{{ i }}</th>
+      </tr>
+      <tr>
+        <th scope="col" class="subheader_1">Severity</th>
+        <th scope="col" class="subheader_2">Issue</th>
+        <th scope="col" class="subheader_2">Solution</th>
+      </tr>
+      {% for x in remaining_vuln %}
+        {% if x.Host == i %}
+          <tr>
+            <td class="severity">{{ x.Risk }}</td>
+            <td class="tablecell">{{ x.Description }}</td>
+            <td class="tablecell">{{ x.Solution }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </table>
+  {% endfor %}
+{% endblock %}

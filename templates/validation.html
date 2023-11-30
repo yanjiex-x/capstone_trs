@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="sidetab">
+  <button class="sidetablinks" onclick="openSidetab(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
+  <button class="sidetablinks" onclick="openSidetab(event, 'Solutions')">Solution</button>
+  <button class="sidetablinks" onclick="openSidetab(event, 'Hosts')">Host</button>
+  <button class="sidetablinks" onclick="openSidetab(event, 'Severity')">Severity</button>
+</div>
+
+<div class="sidetabcontent" id="Dashboard">
+  {% include 'revalidate/dashboard.html' %}
+</div>
+
+<table class="analysiscontentheader">
+  <caption hidden>Filenames</caption>
+  <tr>
+    <td>
+      <b>Before: </b> {{ before_filename }}
+    </td>
+    <td>
+      <b>After: </b> {{ after_filename }}
+    </td>
+  </tr>
+</table>
+
+<div class="sidetabcontent" id="Solutions">
+  {% include 'revalidate/solutions.html' %}
+</div>
+
+<div class="sidetabcontent" id="Hosts">
+  {% include 'revalidate/hosts.html' %}
+</div>
+
+<div class="sidetabcontent" id="Severity">
+  {% include 'revalidate/severity.html' %}
+</div>
+
+<script src="{{ url_for('static', filename='js/sidetab.js') }}"></script>
+<script src="{{ url_for('static', filename='js/severity_colour.js') }}"></script>
+{% endblock %}

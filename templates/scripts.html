@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <h1>Mitigation Scripts</h1>
+  <div class="search-list">
+    <input type="text" id="search_list" onkeyup="search()" placeholder="Search for the application name here">
+    <ul id="app_list">
+      <li><button class="listlinks" onclick="openDiv(event, 'Chrome')">Google Chrome</button></li>
+      <li><button class="listlinks" onclick="openDiv(event, 'Reboot')">Reboot Windows</button></li>
+      <li><button class="listlinks" onclick="openDiv(event, 'Winupdate')">Windows Update</button></li>
+      <li><button class="listlinks" onclick="openDiv(event, 'Firefox')">Mozilla Firefox</button></li>
+      <li><button class="listlinks" onclick="openDiv(event, 'Office365')">Microsoft 365 (Office)</button></li>
+      <li><button class="listlinks" onclick="openDiv(event, 'MicrosoftApps')">Microsoft Applications</button></li>
+    </ul>
+  </div>
+
+  <!-- Microsoft Applications -->
+  <div class="listcontent" id="MicrosoftApps">
+    {% include 'scripts/microsoftapps.html' %}
+  </div>
+
+  <!-- Google Chrome -->
+  <div class="listcontent" id="Chrome">
+    {% include 'scripts/chrome.html' %}
+  </div>
+
+  <!-- Reboot -->
+  <div class="listcontent" id="Reboot">
+    {% include 'scripts/reboot.html' %}
+  </div>
+
+  <!-- Windows Update -->
+  <div class="listcontent" id="Winupdate">
+    {% include 'scripts/winupdate.html' %}
+  </div>
+
+  <!-- Mozilla Firefox -->
+  <div class="listcontent" id="Firefox">
+    {% include 'scripts/firefox.html' %}
+  </div>
+
+  <!-- Microsoft 365 (Office) -->
+  <div class="listcontent" id="Office365">
+    {% include 'scripts/office365.html' %}
+  </div>
+  <script src="{{ url_for('static', filename='js/script_page.js') }}"></script>
+{% endblock %}

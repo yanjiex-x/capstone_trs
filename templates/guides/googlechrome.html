@@ -1,0 +1,55 @@
+{% block body %}
+  <div class="inner_content">
+    <h2>Update Google Chrome</h2><br>
+
+    <h3>Host-by-host basis (Manually)</h3>
+    <ol class="instructions">
+      <li>
+        In the address bar, type <b>chrome://settings/help</b>. Or
+      </li>
+      <li>
+        Click on the <img src="{{ url_for('static', filename='css/three-dots-vertical.svg') }}" alt="three-dot"> icon at the top-right corner of the browser.
+      </li>
+      <li>
+        Hover over <b>Help</b> and select <b>About Google Chrome</b>.
+      </li>
+      <li>
+        Google Chrome should automatically start to check for updates. If there are, click <b>Relaunch</b> or simply close and reopen the browser to apply the updates.
+      </li>
+    </ol>
+    <br>
+
+    <h3>Bulk updates (Automatic)</h3>
+    <ol class="instructions">
+      <li>
+        Download either of the googlechrome scripts <a href="scripts">here</a> and execute it in the machine's Windows Command Prompt or PowerShell.
+      </li>
+    </ol>
+    <br>
+
+    <h3>Configure auto-updates</h3>
+    <h4>Using Group Policy</h4>
+    <p>In Group Policy (<b>Computer Configuration</b> folder):</p>
+    <ol class="instructions">
+      <li>
+        Go to <b>Google</b> > <b>Google Update</b> > <b>Applications</b>
+      </li>
+      <li>
+        Enable the <b>Update policy override default</b> policy.
+      </li>
+      <li>
+        Under <b>Options</b>, choose <b>Allow updates (recommended)</b>.
+      </li>
+      <li>
+        Go to <b>Google</b> > <b>Google Update</b> > <b>Applications</b> > <b>Google Chrome</b>
+        and repeat steps 2 and 3 to make sure auto-updates are also always allowed for Chrome
+        browser.
+      </li>
+    </ol>
+
+    <div class="alert alert-light">
+        You can optionally override this setting for an individual app by using the <b>Update policy override</b> policy
+        in the specific app folder.
+    </div>
+  </div>
+{% endblock %}

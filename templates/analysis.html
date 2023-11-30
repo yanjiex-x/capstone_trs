@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <div class="sidetab">
+    <button class="sidetablinks" id="download" onclick="openSidetab(event, 'Report')"><img src="{{ url_for('static', filename='css/box-arrow-down.svg') }}" alt="Download" id="download_img"><br>Download Report</button>
+    <hr>
+    <button class="sidetablinks" onclick="openSidetab(event, 'Dashboard')" id="defaultOpen">Dashboard</button>
+    <button class="sidetablinks" onclick="openSidetab(event, 'Solutions')">Solution</button>
+    <button class="sidetablinks" onclick="openSidetab(event, 'Hosts')">Host</button>
+    <button class="sidetablinks" onclick="openSidetab(event, 'Severity')">Severity</button>
+  </div>
+
+  {% with errors = get_flashed_messages(category_filter=["error"]) %}
+    {% for msg in errors %}
+      <div class="alert alert-danger error">
+        <p>{{ msg }}</p>
+      </div>
+    {% endfor %}
+  {% endwith %}
+  {% with success = get_flashed_messages(category_filter=['success']) %}
+    {% for msg in success %}
+      <div class="alert alert-success">
+        <p>{{ msg }}</p>
+      </div>
+    {% endfor %}
+  {% endwith %}
+
+  <div class="sidetabcontent" id="Dashboard">
+    {% include 'analysis/dashboard.html' %}
+  </div>
+
+  <table class="analysiscontentheader">
+    <caption hidden>Content</caption>
+    <tr>
+      <td>File Uploaded: {{ filename }}</td>
+      <td id="resources">
+        <a id="resourceslink" href="{{ url_for('resources') }}">Resources</a>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <div class="sidetabcontent" id="Solutions">
+    {% include 'analysis/solutions.html' %}
+  </div>
+
+  <div class="sidetabcontent" id="Hosts">
+    {% include 'analysis/hosts.html' %}
+  </div>
+
+  <div class="sidetabcontent" id="Severity">
+    {% include 'analysis/severity.html' %}
+  </div>
+
+  <div class="sidetabcontent" id="Report">
+    {% include 'form.html' %}
+  </div>
+
+  <script src="{{ url_for('static', filename='js/sidetab.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/severity_colour.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/collapsible.js') }}"></script>
+{% endblock %}

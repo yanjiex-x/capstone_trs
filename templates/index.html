@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <form enctype="multipart/form-data" action="" method="post">
+    <h1>Result Analysis</h1>
+    <label>Upload the CSV file here:</label>
+    <div class="input_container">
+      <input type="file" accept=".csv" name="fileUpload" id="fileUpload">
+      <input type="submit" name="submit" id="submit" value="Upload">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    </div>
+    <input type="hidden" name="id" value="1">
+  </form>
+{% endblock %}

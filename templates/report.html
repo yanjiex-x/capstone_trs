@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Report</title>
+    <style type="text/css">
+      .new-page{
+        page-break-before: always;
+      }
+
+      body{
+        font-family: Calibri;
+        font-size: 15px;
+      }
+
+      /* h1{
+        font-size: 20px;
+        font-weight: bold;
+        color: #034638;
+      } */
+
+      h2{
+        font-size: 18px;
+        font-weight: bold;
+        color: #9E652E;
+      }
+
+      ol {
+        list-style-type: none;
+        counter-reset: item;
+        margin: 0;
+        padding: 0;
+      }
+
+      ol > li {
+        display: table;
+        counter-increment: item;
+        margin-bottom: 1em;
+        width: 100%;
+      }
+
+      ol > li:before {
+        content: counters(item, ".") ". ";
+        display: table-cell;
+        padding-right: 0.6em;
+      }
+
+      li ol > li {
+        margin: 0;
+        margin-bottom: 1em;
+      }
+
+      li ol > li:before {
+        content: counters(item, ".") " ";
+      }
+
+      table{
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      table, th, td{
+        border: thin solid black;
+        padding: 12px;
+      }
+
+      th{
+        color: #034638;
+      }
+
+      .severity{
+        border: thin solid;
+        padding: 5px;
+        float: right;
+        margin-right: 10px;
+        width: 200px;
+        margin-top: 10px;
+        color: #034638;
+      }
+    </style>
+  </head>
+  <body>
+    <ol>
+      <!-- Section 1: Introduction -->
+      <li>
+        Introduction
+        <ol>
+          <li>
+            {{ companyname }} ("{{ companyabbv }}") has engaged TRS Forensics Pte Ltd ("TRS") to assist in
+            enhancing both its data protection practices and cybersecurity posture.
+          </li>
+          <li>
+            Vulnerability assessment is an inspection of the potential points of system exploits and
+            vulnerabilities in the application, gathering evidence for each finding, assessing the risk levels
+            and potential implications of each threat, and proposing the corresponding recommendations for
+            remediation.
+          </li>
+          <li>
+            Vulnerability assessment is based on the results of scanning the office computers at
+            {{ companyabbv }} on the dates between {{ startdate }} and {{ enddate }} using Tenable.io agent.
+          </li>
+          <li>
+            This vulnerability scan covered a total of {{ numhosts }} staff computer(s) and detailed reports
+            are attached.
+          </li>
+          <h2>Vulnerability Status as of {{ startdate }}</h2>
+          <li>
+            The scanning of {{ numhosts }} computer(s) has found a total of {{ num_critical }} critical and {{ num_high }} high-risk
+            vulnerabilities.
+          </li>
+          <li>
+            The vulnerability assessment revealed the following issues:
+            <ol>
+              <li>End-of-suppport software to be upgraded (more details in paragraph x).</li>
+              <li>Staff computers with unapplied software updates from Microsoft and other third-party
+              application vendors (more details in paragraph x) and unapplied security patches (more
+              details in paragraph x.)</li>
+              <li>Staff computers with unapplied security settings (more details in paragraph x).</li>
+              <li>Staff computers with unquoted service path enumerated (more details in paragraph x).</li>
+            </ol>
+          </li>
+          <li>
+            We recommend the following actions:
+            <ol>
+              <li>Apply all third-party patches and/or renew the third-party apps with a newer version.</li>
+              <li>Apply all Microsoft security and software patches to correct detected vulnerabilities.</li>
+              <li>Enable necessary security settings to protect endpoints.</li>
+              <li>Ensure proper configuration of service paths and to align setup with corporate IT policy.</li>
+            </ol>
+          </li>
+          <li>
+            Most issues found may be solved by upgrading end-of-life (EOL) operating systems and deploying an
+            automated patch management solution such as ManageEngine Patch Manager (<a href="https://www.manageengine.com/patch-management/">https://www.manageengine.com/patch-management/</a>).
+            Deploying such tools makes periodic and regular software patch application more productive,
+            provides corresponding activity logs and notifications for exceptional situations, and reduces
+            human intervention.
+          </li>
+          <h2>Conclusion</h2>
+          <li>
+            Vulnerabilities rated Critical, High, and Medium should be fixed to improve the security
+          posture of the endpoints.
+        </li>
+        </ol>
+      </li>
+
+      <!-- Section 2: End-of-support Software and OS  -->
+      {% if 'support' in '\t'.join(solutions_list) or 'life' in '\t'.join(solutions_list) %}
+        <li class="new-page">
+          End-of-Support Software and Operating Systems to be Upgraded
+          <ol>
+            {% for main_keys, main_values in solutions.items() %}
+              {% if 'support' in main_keys or 'life' in main_keys %}
+                <li>
+                  The vulnerability scan revealed that the following computer(s):
+                  <table>
+                    <caption hidden>Unsupported applications</caption>
+                    <tr>
+                      <th>S/N</th>
+                      <th>Computer Name</th>
+                    </tr>
+                    {% for keys, values in solutions_hosts.items() %}
+                      {% if main_keys == keys %}
+                        {% for i in values %}
+                          <tr>
+                            <td>{{ values.index(i) + 1 }}</td>
+                            <td>{{ i }}</td>
+                          </tr>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </table>
+                  {% for keys, values in main_values.items() %}
+                    {% for x in values %}
+                      has {{ x[0].lower() + x[1:] }}
+                      {{ companyabbv }} should {{ main_keys[0].lower() + main_keys[1:] }}
+                    {% endfor %}
+                  {% endfor %}
+                  <br>
+                  <span class="severity">
+                    {% for keys, values in solutions_risk.items() %}
+                      {% if keys == main_keys %}
+                        {% for k in values %}
+                          Risk Rating: {{ k }}
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ol>
+        </li>
+      {% endif %}
+
+      <!-- Section 3: Update Microsoft/Third-party Apps -->
+      {% if 'Upgrade' in '\t'.join(solutions_list) %}
+        <li>
+          Updates/New Versions for Microsoft/Third-party Apps
+          <ol>
+            {% for main_keys, main_values in solutions.items() %}
+              {% if 'Upgrade' in main_keys %}
+                {% if 'support' not in main_keys and 'life' not in main_keys %}
+                  <li>
+                    The vulnerability scan revealed that the following computer(s):
+                    <table>
+                      <caption hidden>Out-of-date applications</caption>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Computer Name</th>
+                      </tr>
+                      {% for keys, values in solutions_hosts.items() %}
+                        {% if main_keys == keys %}
+                          {% for i in values %}
+                            <tr>
+                              <td>{{ values.index(i) + 1 }}</td>
+                              <td>{{ i }}</td>
+                            </tr>
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    </table>
+                    {% for keys, values in main_values.items() %}
+                      {% for x in values %}
+                        has {{ x[0].lower() + x[1:] }}
+                        {{ companyabbv }} should {{ main_keys[0].lower() + main_keys[1:] }}
+                      {% endfor %}
+                    {% endfor %}
+                    <br>
+                    <span class="severity">
+                      {% for keys, values in solutions_risk.items() %}
+                        {% if keys == main_keys %}
+                          {% for k in values %}
+                            Risk Rating: {{ k }}
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    </span>
+                  </li>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </ol>
+        </li>
+      {% endif %}
+
+      <!-- Section 4: Security and Software Patches -->
+      {% if 'Security Update' in '\t'.join(name_list) or 'KB' in '\t'.join(name_list) or 'EnableCertPaddingCheck' in '\t'.join(name_list) or 'Reboot' in '\t'.join(name_list) %}
+        <li>
+          Security and Software Patches and Registry Misconfiguration
+          <ol>
+            {% for main_keys, main_values in names.items() %}
+              {% if 'Security Update' in main_keys or 'KB' in main_keys %}
+                <li>
+                  The vulnerability scan revealed that the following computer(s) has missing {{ main_keys }}.
+                  <table>
+                    <caption hidden>Security updates</caption>
+                    <tr>
+                      <th>S/N</th>
+                      <th>Computer Name</th>
+                    </tr>
+                    {% for keys, values in main_values.items() %}
+                      {% for i in values %}
+                        <tr>
+                          <td>{{ values.index(i) + 1 }}</td>
+                          <td>{{ i }}</td>
+                        </tr>
+                      {% endfor %}
+                    {% endfor %}
+                  </table>
+                  As this condition puts the computer(s) at risk of multiple vulnerabilities, it is recommended that
+                  {% for keys, values in main_values.items() %}
+                    {{ keys[0].lower() + keys[1:]}}
+                  {% endfor %}
+                  <br>
+                  <span class="severity">
+                    {% for keys, values in main_values.items() %}
+                      {% for k, v in solutions_risk.items() %}
+                        {% if k == keys %}
+                          {% for y in v %}
+                            Risk Rating: {{ y }}
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </span>
+                </li>
+              {% elif 'EnableCertPaddingCheck' in main_keys %}
+                <li>
+                  The vulnerability scan revealed that the following computer(s) have a misconfigured
+                  registry setting.
+                  <table>
+                    <caption hidden>Enable Cert Padding Check</caption>
+                    <tr>
+                      <th>S/N</th>
+                      <th>Computer Name</th>
+                    </tr>
+                    {% for keys, values in main_values.items() %}
+                      {% for i in values %}
+                        <tr>
+                          <td>{{ values.index(i) + 1 }}</td>
+                          <td>{{ i }}</td>
+                        </tr>
+                      {% endfor %}
+                    {% endfor %}
+                  </table>
+                  As this condition puts the computer(s) at risk, it is recommended that the registry DWORD
+                  values be set to 1:
+                  <ul>
+                    <li>HKEY_LOCAL_MACHINE\Software\Microsoft\Cryptography\Wintrust\Config\EnableCertPaddingCheck</li>
+                    <li>HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config\EnableCertPaddingCheck</li>
+                  </ul>
+                  <br>
+                  <span class="severity">
+                    {% for keys, values in main_values.items() %}
+                      {% for k, v in solutions_risk.items() %}
+                        {% if k == keys %}
+                          {% for y in v %}
+                            Risk Rating: {{ y }}
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </span>
+                </li>
+              {% endif %}
+              <!-- Add in reboot -->
+              {% if 'Reboot' in main_keys %}
+                <li>
+                  The vulnerability scan revealed that the following computer(s) have several unapplied Microsoft/third-party patches issued.
+                  <table>
+                    <caption hidden>Reboot</caption>
+                    <tr>
+                      <th>S/N</th>
+                      <th>Computer Name</th>
+                    </tr>
+                    {% for keys, values in main_values.items() %}
+                      {% for i in values %}
+                        <tr>
+                          <td>{{ values.index(i) + 1 }}</td>
+                          <td>{{ i }}</td>
+                        </tr>
+                      {% endfor %}
+                    {% endfor %}
+                  </table>
+                  As this coniditon puts the computer(s) at risk, it is recommended that the patches shown under Windows Update be applied.
+                  <br>
+                  <span class="severity">
+                    {% for keys, values in main_values.items() %}
+                      {% for k, v in solutions_risk.items() %}
+                        {% if k == keys %}
+                          {% for y in v %}
+                            Risk Rating: {{ y }}
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ol>
+        </li>
+      {% endif %}
+
+      <!-- Section 5: Insecure Windows Permission -->
+      {% if 'Insecure Windows Service Permissions' in '\t'.join(name_list) %}
+        <li>
+          Insecure Windows Permissions
+          {% for main_keys, main_values in names.items() %}
+            {% if 'Insecure Windows Service Permissions' in main_keys %}
+              <ol>
+                <li>
+                  A user should not be able to modify or overwrite an executable program with arbitrary code. Depending on the user that the service runs as this could result in privilege escalation.
+                  <ul>
+                    <li>Everyone</li>
+                    <li>Users</li>
+                    <li>Domain Users</li>
+                    <li>Authenticated Users</li>
+                  </ul>
+                  {{ companyabbv }} should ensure the groups listed above do not have permissions to modify or write service executables. Additionally, ensure these groups do not have Full Control permission to any directories that contain service executables.
+                  <br>
+                  {{ companyabbv }} may refer to the remediation steps as follow:
+                  <ul>
+                    <li>
+                      Go to <a href="https://github.com/astrixsystems/Secure-WindowsServices">https://github.com/astrixsystems/Secure-WindowsServices</a>
+                    </li>
+                    <li>Download the script and run it.</li>
+                  </ul>
+                  <table>
+                    <caption hidden>Insecure windows permissions</caption>
+                    <tr>
+                      <th>S/N</th>
+                      <th>Computer Name</th>
+                    </tr>
+                    {% for keys, values in main_values.items() %}
+                      {% for i in values %}
+                        <tr>
+                          <td>{{ values.index(i) + 1 }}</td>
+                          <td>{{ i }}</td>
+                        </tr>
+                      {% endfor %}
+                    {% endfor %}
+                  </table>
+                  <span class="severity">
+                    {% for keys, values in main_values.items() %}
+                      {% for k, v in solutions_risk.items() %}
+                        {% if k == keys %}
+                          {% for y in v %}
+                            Risk Rating: {{ y }}
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </span>
+                </li>
+              </ol>
+            {% endif %}
+          {% endfor %}
+        </li>
+      {% endif %}
+
+      <!-- Section 6: Unquoted Path Enumeration -->
+      {% if 'Unquoted Service Path Enumeration' in '\t'.join(name_list) %}
+        <li>
+          Microsoft Windows Unquoted Service Path Enumeration
+          {% for main_keys, main_values in names.items() %}
+            {% if 'Unquoted Service Path Enumeration' in main_keys %}
+              <ol>
+                <li>
+                  The following vulnerability scan revealed that the following computer(s):
+                  <table>
+                    <caption hidden>Unquoted service path</caption>
+                    <tr>
+                      <th>S/N</th>
+                      <th>Computer Name</th>
+                    </tr>
+                    {% for keys, values in main_values.items() %}
+                      {% for i in values %}
+                        <tr>
+                          <td>{{ values.index(i) + 1 }}</td>
+                          <td>{{ i }}</td>
+                        </tr>
+                      {% endfor %}
+                    {% endfor %}
+                  </table>
+                  have at least one service installed that uses an unquoted service path, which contains
+                  at least one whitespace. A local attacker can gain elevated privileges by inserting an
+                  executable file in the path of the affected service. {{ companyabbv }} should ensure
+                  that any services that contain a space in the path encloses the path in quotes.
+                  {{ companyabbv }} may refer to <a href="https://www.techiessphere.com/2017/06/how-to-fix-unquoted-service-path-vulnerability.html">https://www.techiessphere.com/2017/06/how-to-fix-unquoted-service-path-vulnerability.html</a>.
+                  <br>
+                  <span class="severity">
+                    {% for keys, values in main_values.items() %}
+                      {% for k, v in solutions_risk.items() %}
+                        {% if k == keys %}
+                          {% for y in v %}
+                            Risk Rating: {{ y }}
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </span>
+                </li>
+              </ol>
+            {% endif %}
+          {% endfor %}
+        </li>
+      {% endif %}
+
+      <li>
+        Risk Summary
+        <ol>
+          <li>
+            The numbers of critical and high-risk vulnerabilities for each host is significant as they
+            often lead to remote code execution (RCE) attacks by hackers:
+            <table>
+              <caption hidden>Counts of critical & high risk vulns</caption>
+              <tr>
+                <th>Host</th>
+                <th>Critical</th>
+                <th>High</th>
+              </tr>
+              {% for keys, values in hosts_vuln_count.items() %}
+                <tr>
+                  <td>{{ keys }}</td>
+                  <td>{{ values.Critical }}</td>
+                  <td>{{ values.High }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </li>
+        </ol>
+      </li>
+
+      <li>
+        Reference Reports
+        <ul>
+          <li> {{ filename }} </li>
+        </ul>
+      </li>
+
+      <li>
+        Definitions of Risk
+        <ol>
+          <li>
+            The definitions of risk ratings are set out below. The severity of a vulnerability is
+            determined by the rating provided by the National Institute of Standards and Technology (NIST)
+            Common Vulnerability Scoring System (CVSS).
+            <table>
+              <caption hidden>Definitions of risk</caption>
+              <tr>
+                <th>Risk Rating</th>
+                <th>Definitions</th>
+                <th>Remediation Time Frame</th>
+              </tr>
+              <tr>
+                <td>Critical</td>
+                <td>
+                  If this vulnerability exists on your system, intruders can easily gain control of the host,
+                  which can lead to the compromise of your entire network security. For example, vulnerabilities
+                  at this level may include full read and write access to files, remote execution of commands,
+                  and the presence of backdoors.
+                </td>
+                <td>15 days</td>
+              </tr>
+              <tr>
+                <td>High</td>
+                <td>
+                  If this vulnerability exists on your system, intruders can possibly gain control of the host,
+                  or there may be potential leakage of highly sensitive information. For example, vulnerabilities
+                  at this level may include full read access to files, potential backdoors, or a listing of all
+                  the users on the host.
+                </td>
+                <td>30 days</td>
+              </tr>
+              <tr>
+                <td>Serious</td>
+                <td>
+                  If this vulnerability exists on your system, intruders may be able to gain access to specific
+                  information stored on the host, including security settings. This could result in potential misuse
+                  of the host by intruders. For example, vulnerabilities at this level may include partial disclosure
+                  of file contents, access to certain files on the host, directory browsing, disclosure of filtering
+                  rules and security mechanisms, denial of service.
+                </td>
+                <td>45 days</td>
+              </tr>
+              <tr>
+                <td>Medium</td>
+                <td>
+                  If this vulnerability exists on your system, intruders may be able to collect sensitive information
+                  from the host, such as the precise version of software installed. With this information, intruders
+                  can easily exploit known vulnerabilities specific to software versions.
+                </td>
+                <td>60 days</td>
+              </tr>
+              <tr>
+                <td>Low</td>
+                <td>
+                  If this vulnerability exists on your system, intruders can collect information about the host
+                  (open ports, services, etc.) and may be able to use this information to find other vulnerabilities.
+                </td>
+                <td>90 days</td>
+              </tr>
+            </table>
+          </li>
+          <li>
+            The non-eliminated vulnerabilities are listed, if any, below with the management's approval and sign-off.
+            <table>
+              <caption hidden>Non-eliminated vulns</caption>
+              <tr>
+                <th>S/N</th>
+                <th>Non-eliminated Vulnerability</th>
+                <th>Reason</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </li>
+          <table>
+            <caption hidden>Approval from senior management</caption>
+            <tr>
+              <th>Approved by</th>
+              <th>Date</th>
+              <th>Signature</th>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </ol>
+      </li>
+    </ol>
+  </body>
+</html>

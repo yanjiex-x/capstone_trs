@@ -1,0 +1,68 @@
+<table>
+  <caption hidden>Microsoft apps</caption>
+  <tr>
+    <th>Script Name:</th>
+    <td><a href="{{ url_for('static', filename='scripts/microsoftapps.bat') }}" title="Click to download" download>microsoftapps.bat</a></td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td>
+      Batch script to update all Microsoft applications.
+      <div class="alert alert-primary">
+        <img src="{{ url_for('static', filename='css/card-list.svg') }}" alt="card-list">  Note:
+        <ul>
+          <li><b>NOT</b> all applications can be updated.</li>
+          <li>The <b>winget</b> tool is only supported on Windows 10 1709 and later. </li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>Command(s):</th>
+    <td>
+      <div>
+        For first-time <b>winget</b> users, enter the following command before executing the downloaded script:
+        <p id="command">winget upgrade</p>
+      </div>
+      <div>
+        <u>Command Prompt</u>
+        <p id="command">microsoftapps.bat</p>
+      </div>
+      <div>
+        <u>PowerShell</u>
+        <p id="command">./microsoftapps.bat</p>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Script Name:</th>
+    <td><a href="{{ url_for('static', filename='scripts/microsoftapps.ps1') }}" title="Click to download" download>microsoftapps.ps1</a></td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td>
+      PowerShell script to update all Microsoft applications.
+      <div class="alert alert-primary">
+        <img src="{{ url_for('static', filename='css/card-list.svg') }}" alt="card-list">  Note:
+        <ul>
+          <li><b>NOT</b> all applications can be updated.</li>
+          <li>The <b>winget</b> tool is only supported on Windows 10 1709 and later. </li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>Command(s):</th>
+    <td>
+      <div>
+        For first-time <b>winget</b> users, enter the following command before executing the downloaded script:
+        <p id="command">winget upgrade</p>
+      </div>
+      <div>
+        <u>PowerShell</u>
+        <p id="command">./microsoftapps.ps1</p>
+      </div>
+    </td>
+  </tr>
+</table>

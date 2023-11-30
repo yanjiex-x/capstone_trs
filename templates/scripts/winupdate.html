@@ -1,0 +1,32 @@
+<table>
+  <caption hidden>Windows update</caption>
+  <tr>
+    <th>Script Name:</th>
+    <td><a href="{{ url_for('static', filename='scripts/winupdate.bat') }}" title="Click to download" download>winupdate.bat</a></td>
+  </tr>
+  <tr>
+    <th>Description:</th>
+    <td>
+      Batch script to update Windows security patches.
+      <div class="alert alert-primary">
+        <img src="{{ url_for('static', filename='css/card-list.svg') }}" alt="card-list">  Note:
+        <ul>
+          <li>Only for <b>Windows 10 and above</b>, though might not be available for all hosts.</li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>Command(s):</th>
+    <td>
+      <div>
+        <u>Command Prompt</u>
+        <p id="command">winupdate.bat</p>
+      </div>
+      <div>
+        <u>PowerShell</u>
+        <p id="command">./winupdate.bat</p>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,215 @@
+{% if 'support' in '\t'.join(solutions_list) or 'life' in '\t'.join(solutions_list) %}
+  <h1 class="analysis_header">End-of-Support Software and/or Operating Systems to be Upgraded</h1>
+  {% for main_keys, main_values in solutions.items() %}
+    {% if 'support' in main_keys or 'life' in main_keys %}
+      <table class="tablecontent">
+        <caption hidden>Unsupported applications</caption>
+        <tr>
+          <th scope="row" class="header">
+            {{ main_keys }}
+            {% for keys, values in main_values.items() %}
+              {% for i in values %}
+                <p class="description">{{ i }}</p>
+              {% endfor %}
+            {% endfor %}
+          </th>
+        </tr>
+        <tr>
+          <th scope="row" class="subheader">Hosts / IP</th>
+        </tr>
+        {% for keys, values in host_solutions.items() %}
+          {% for i in values %}
+            {% if i == main_keys %}
+              <tr>
+                <td>{{ keys }}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+        {% for keys, values in solutions_risk.items() %}
+          {% if keys == main_keys %}
+            {% for x in values %}
+              <td class="severity">{{ x }}</td>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% if 'Upgrade' in '\t'.join(solutions_list) %}
+  <h1 class="analysis_header">Updates/New Versions for Microsoft/Third-party Apps</h1>
+  {% for main_keys, main_values in solutions.items() %}
+    {% if 'Upgrade' in main_keys %}
+      {% if 'support' not in main_keys and 'life' not in main_keys %}
+        <table class="tablecontent">
+          <caption hidden>Out-of-date applications</caption>
+          <tr>
+            <th scope="row" class="header">
+              {{ main_keys }}
+              {% for keys, values in main_values.items() %}
+                {% for i in values %}
+                  <p class="description">{{ i }}</p>
+                {% endfor %}
+              {% endfor %}
+            </th>
+          </tr>
+          <tr>
+            <th scope="row" class="subheader">Hosts / IP</th>
+          </tr>
+          {% for keys, values in host_solutions.items() %}
+            {% for i in values %}
+              {% if i == main_keys %}
+                <tr>
+                  <td>{{ keys }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% for keys, values in solutions_risk.items() %}
+            {% if keys == main_keys %}
+              {% for x in values %}
+                <td class="severity">{{ x }}</td>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </table>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% if 'Security Update' in '\t'.join(name_list) or 'KB' in '\t'.join(name_list) or 'EnableCertPaddingCheck' in '\t'.join(name_list) or 'Reboot' in '\t'.join(name_list) %}
+  <h1 class="analysis_header">Unapplied Security and Software Patches and Registry Misconfiguration</h1>
+  {% for main_keys, main_values in names.items() %}
+    {% if 'Security Update' in main_keys or 'KB' in main_keys or 'EnableCertPaddingCheck' in main_keys or 'Reboot' in main_keys %}
+      <table class="tablecontent">
+        <caption hidden>Security updates</caption>
+        <tr>
+          <th scope="row" class="header">
+            {% for keys, values in main_values.items() %}
+              {{ keys }}
+              {% for key, value in solutions.items() %}
+                {% if key == keys %}
+                  {% for k, v in value.items() %}
+                    {% for i in v %}
+                      <p class="description">{{ i }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </th>
+        </tr>
+        <tr>
+          <th scope="row" class="subheader">Hosts / IP</th>
+        </tr>
+        {% for keys, values in main_values.items() %}
+          {% for i in values %}
+            <tr>
+              <td>{{ i }}</td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+        {% for keys, values in main_values.items() %}
+          {% for key, value in solutions_risk.items() %}
+            {% if key == keys %}
+              {% for i in value %}
+                <td class="severity">{{ i }}</td>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% if 'Insecure Windows Service Permissions' in '\t'.join(name_list) %}
+  <h1 class="analysis_header">Insecure Windows Permissions</h1>
+  {% for main_keys, main_values in names.items() %}
+    {% if 'Insecure Windows Service Permissions' in main_keys %}
+      <table class="tablecontent">
+        <caption hidden>Insecure windows service permissions</caption>
+        <tr>
+          <th scope="row" class="header">
+            {% for keys, values in main_values.items() %}
+              {{ keys }}
+              {% for key, value in solutions.items() %}
+                {% if key == keys %}
+                  {% for k, v in value.items() %}
+                    {% for i in v %}
+                      <p class="description">{{ i }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </th>
+        </tr>
+        <tr>
+          <th scope="row" class="subheader">Hosts / IP</th>
+        </tr>
+        {% for keys, values in main_values.items() %}
+          {% for i in values %}
+            <tr>
+              <td>{{ i }}</td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+        {% for keys, values in main_values.items() %}
+          {% for key, value in solutions_risk.items() %}
+            {% if key == keys %}
+              {% for i in value %}
+                <td class="severity">{{ i }}</td>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% if 'Unquoted Service Path Enumeration' in '\t'.join(name_list) %}
+  <h1 class="analysis_header">Microsft Windows Unquoted Service Path Enumeration</h1>
+  {% for main_keys, main_values in names.items() %}
+    {% if 'Unquoted Service Path Enumeration' in main_keys %}
+      <table class="tablecontent">
+        <caption hidden>unquoted service path enumeration</caption>
+        <tr>
+          <th scope="row" class="header">
+            {% for keys, values in main_values.items() %}
+            {{ keys }}
+              {% for key, value in solutions.items() %}
+                {% if key == keys %}
+                  {% for k, v in value.items() %}
+                    {% for i in v %}
+                      <p class="description">{{ i }}</p>
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </th>
+        </tr>
+        <tr>
+          <th scope="row" class="subheader">Hosts / IP</th>
+        </tr>
+        {% for keys, values in main_values.items() %}
+          {% for i in values %}
+            <tr>
+              <td>{{ i }}</td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+        {% for keys, values in main_values.items() %}
+          {% for key, value in solutions_risk.items() %}
+            {% if key == keys %}
+              {% for i in value %}
+                <td class="severity">{{ i }}</td>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </table>
+    {% endif %}
+  {% endfor %}
+{% endif %}

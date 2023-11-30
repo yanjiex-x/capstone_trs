@@ -1,0 +1,26 @@
+<div class="reportform">
+  <form enctype="multipart/form-data" class="" action="{{ url_for('report') }}" method="post">
+    {{ form.csrf_token }}
+
+    <h2>Report Details</h2>
+
+    <table id="formtable">
+      <caption hidden>Form</caption>
+      <tr>
+        <th scope="col">Please fill in the details to be added into the report.</th>
+        <td>{{ form.companyname.label }}</td>
+        <td>{{ form.companyname }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.companyabbv.label }}</td>
+        <td>{{ form.companyabbv }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">{{ form.startdate.label }} {{ form.startdate }} {{ form.enddate.label(class_='coltwo') }} {{ form.enddate }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">{{ form.generate(class_='grbtn') }}</td>
+      </tr>
+    </table>
+  </form>
+</div>

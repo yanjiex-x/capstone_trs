@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <h1>Step-by-step Guides</h1>
+
+  <div class="row guides">
+    <div class="col-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="list-firefox-list" data-bs-toggle="list" href="#list-firefox" role="tab" aria-controls="list-firefox">Firefox</a>
+        <a class="list-group-item list-group-item-action" id="list-microsoftapps-list" data-bs-toggle="list" href="#list-microsoftapps" role="tab" aria-controls="list-microsoftapps">Microsoft Applications</a>
+        <a class="list-group-item list-group-item-action" id="list-googlechrome-list" data-bs-toggle="list" href="#list-googlechrome" role="tab" aria-controls="list-googlechrome">Google Chrome</a>
+        <a class="list-group-item list-group-item-action" id="list-adobeflash-list" data-bs-toggle="list" href="#list-adobeflash" role="tab" aria-controls="list-adobeflash">Adobe Flash Player</a>
+        <a class="list-group-item list-group-item-action" id="list-reboot-list" data-bs-toggle="list" href="#list-reboot" role="tab" aria-controls="list-reboot">Reboot Windows machine(s)</a>
+        <a class="list-group-item list-group-item-action" id="list-winupdate-list" data-bs-toggle="list" href="#list-winupdate" role="tab" aria-controls="list-winupdate">Windows Update</a>
+        <a class="list-group-item list-group-item-action" id="list-office365-list" data-bs-toggle="list" href="#list-office365" role="tab" aria-controls="list-office365">Microsoft 365 (Office)</a>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-firefox" role="tabpanel" aria-labelledby="list-firefox-list">
+          {% include 'guides/firefox.html' %}
+        </div>
+        <div class="tab-pane fade" id="list-microsoftapps" role="tabpanel" aria-labelledby="list-microsoftapps-list">
+          {% include 'guides/microsoftapps.html' %}
+        </div>
+        <div class="tab-pane fade" id="list-googlechrome" role="tabpanel" aria-labelledby="list-googlechrome-list">
+          {% include 'guides/googlechrome.html' %}
+        </div>
+        <div class="tab-pane fade" id="list-adobeflash" role="tabpanel" aria-labelledby="list-adobeflash-list">
+          {% include 'guides/adobeflash.html' %}
+        </div>
+        <div class="tab-pane fade" id="list-reboot" role="tabpanel" aria-labelledby="list-reboot-list">
+          {% include 'guides/reboot.html' %}
+        </div>
+        <div class="tab-pane fade" id="list-winupdate" role="tabpanel" aria-labelledby="list-winupdate-list">
+          {% include 'guides/winupdate.html' %}
+        </div>
+        <div class="tab-pane fade" id="list-office365" role="tabpanel" aria-labelledby="list-office365-list">
+          {% include 'guides/office365.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

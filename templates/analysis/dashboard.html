@@ -1,0 +1,138 @@
+<div class="row">
+  <div class="card col-md-6" id="countchart" style="height: 300px;">
+    <canvas></canvas>
+  </div>
+  <div class="card col-md-6" id="hostchart">
+    <canvas></canvas>
+  </div>
+  <div class="card col-md-12" id="vulnschart">
+    <canvas></canvas>
+  </div>
+</div>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart1);
+  function drawChart1(){
+    var data = new google.visualization.arrayToDataTable(
+      [{% for key, value in count_data.items() %}
+        {% if key == "Legends" %}
+          {% for k, v in value.items() %}
+            ['{{ k }}', '{{ v }}', {role: 'style'}],
+          {% endfor %}
+        {% else %}
+          {% for k, v in value.items() %}
+            ['{{ k }}', {{ v }}, 'fill-color: {{ key }}; fill-opacity: 0.4'],
+          {% endfor %}
+        {% endif %}
+      {% endfor %}]
+    );
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1, {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+    }, 2]);
+
+    var options = {
+      title: "Vulnerabilities across the System",
+      legend: {position: 'none'},
+      vAxis: {format: '0'},
+      annotations: {
+        highContrast: false,
+        textStyle: {
+          color: "black",
+        }
+      }
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('countchart'));
+    chart.draw(view, options);
+  }
+
+  google.charts.setOnLoadCallback(drawChart2);
+  function drawChart2(){
+    var data = google.visualization.arrayToDataTable([
+      {% for key, value in count_hosts.items() %}
+        {% if value is string %}
+          ['{{ key }}', '{{ value }}', {role:'style'}],
+        {% else %}
+          ['{{ key }}', {{ value }}, 'opacity: 0.2'],
+        {% endif %}
+      {% endfor %}
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1, {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+    }, 2]);
+
+    var options = {
+      title: "Top 5 Hosts / IP",
+      legend: {position: 'none'},
+      hAxis: {format: '0'},
+      annotations: {
+        highContrast: false,
+        textStyle: {
+          color: "black",
+        }
+      }
+    };
+
+    var chart = new google.visualization.BarChart(document.getElementById('hostchart'));
+    chart.draw(view, options);
+  }
+
+  google.charts.setOnLoadCallback(drawChart3);
+  function drawChart3(){
+    var data = google.visualization.arrayToDataTable([
+      {% for key, value in count_vulns.items() %}
+        {% if value is string %}
+          ['{{ key }}', '{{ value }}', {role:'style'}],
+        {% else %}
+          ['{{ key }}', {{ value }}, 'fill-color: #CBC1E1; fill-opacity: 0.5'],
+        {% endif %}
+      {% endfor %}
+    ]);
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1, {
+        calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation"
+    }, 2]);
+
+    var options = {
+      title: "Top 5 Vulnerabilities",
+      legend: {position: 'none'},
+      hAxis: {format: '0'},
+      vAxis: {
+        textStyle: {
+          fontSize: '10',
+        }
+      },
+      annotations: {
+        highContrast: false,
+        textStyle: {
+          color: "black",
+        }
+      }
+    };
+
+    var chart = new google.visualization.BarChart(document.getElementById('vulnschart'));
+    chart.draw(view, options);
+  }
+
+  function resize_all(){
+    drawChart1();
+    drawChart2();
+    drawChart3();
+  }
+
+  window.onresize = resize_all;
+
+</script>

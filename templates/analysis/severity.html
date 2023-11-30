@@ -1,0 +1,36 @@
+{% for main_keys, main_values in risks.items() %}
+  <table class="tablecontent">
+    <caption hidden>Sort by severity</caption>
+    <tr>
+      <th scope="row" class="severity" colspan="3">Severity: {{ main_keys }}</th>
+    </tr>
+    <tr>
+      <th scope="col" class="subheader_2">Solution</th>
+      <th scope="col" class="subheader_2">Issue</th>
+      <th scope="col" class="subheader_2">Hosts / IP</th>
+    </tr>
+    {% for keys, values in main_values.items() %}
+      <tr>
+        <td class="tablecell">{{ keys }}</td>
+        <td class="tablecell">
+          {% for i in values %}
+            <p>{{ i }}</p>
+          {% endfor %}
+        </td>
+        <td class="tablecell">
+          <ul>
+            {% for key, value in names.items() %}
+              {% for k, v in value.items() %}
+                {% if k == keys %}
+                  {% for i in v %}
+                    <li>{{ i }}</li>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endfor %}

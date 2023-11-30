@@ -1,0 +1,33 @@
+{% block body %}
+  <div class="inner_content">
+    <h2>Update Firefox</h2><br>
+
+    <h3>Host-by-host basis (Manually)</h3>
+    <ol class="instructions">
+      <li>
+        Click the <img src="{{ url_for('static', filename='css/list.svg') }}" alt="menu"> button at the top-right corner of the browser.
+      </li>
+      <li>
+        In the drop-down menu, choose <b>Help</b>, then <b>About Firefox</b>.
+      </li>
+      <li>
+        A pop-up window should appear along with an update status message. If the browser is running the latest version, it will
+        say <b>Firefox is up to date</b>. Else, it will say <b>Restart to Update Firefox</b>. Click on that to install the updates
+        and restart the browser.
+      </li>
+    </ol>
+    <br>
+
+    <h3>Bulk updates (Automatic)</h3>
+    <ol class="instructions">
+      <li>
+        Download the firefox script <a href="scripts">here</a> and execute it in the machine's Windows Command Prompt.
+      </li>
+    </ol>
+
+    <div class="alert alert-light">
+      <b>If there still are issues with updating Firefox</b><br>
+      Download the <a href="https://www.mozilla.org/en-US/firefox/all/#product-desktop-release">installer</a>, and make sure to close Firefox before running the installer.
+    </div>
+  </div>
+{% endblock %}

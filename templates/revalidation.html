@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <form enctype="multipart/form-data" action="" method="post" id="revalidationform">
+    <h1>Revalidation</h1>
+    <label>Please upload the CSV files accordingly.</label>
+    <br><br>
+    <div class="row">
+      <label>Before (Original Scan CSV file):</label>
+      <div class="input_container">
+        <input type="file" accept=".csv" name="beforeFileUpload" id="beforeFileUpload">
+      </div>
+    </div>
+    <div class="row">
+      <label>After (Revalidation CSV file):</label>
+      <div class="input_container">
+        <input type="file" accept=".csv" name="afterFileUpload" id="afterFileUpload">
+        <input type="submit" name="submit" id="submit" value="Upload">
+      </div>
+    </div>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  </form>
+{% endblock %}
